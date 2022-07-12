@@ -1,12 +1,7 @@
 import { Category } from '../model/category';
+import { ICreateCategoryDTO, IRepositorie } from './ICategoriesRepository';
 
-// DTO - data transfer object: é um objeto responsável por capturar os dados de uma rota e passá-los para uma classe
-interface ICreateCategoryDTO {
-  name: string;
-  description: string;
-}
-
-class CategoryRepositorie {
+class CategoryRepositorie implements IRepositorie {
   private categories: Category[];
 
   constructor() {

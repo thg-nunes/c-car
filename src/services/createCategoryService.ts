@@ -1,4 +1,4 @@
-import { CategoryRepositorie } from '../repositories/categoriesRepositorie';
+import { IRepositorie } from '../repositories/ICategoriesRepository';
 
 interface ICreateCategoryService {
   name: string;
@@ -8,7 +8,7 @@ interface ICreateCategoryService {
 /** Aqui é aplicado o single resposability principle,
  * pois essa classe tem só uma funcionalidade, que é criar uma categoria */
 class CreateCategoryService {
-  constructor(private categoryRepositorie: CategoryRepositorie) {}
+  constructor(private categoryRepositorie: IRepositorie) {}
 
   excute({ name, description }: ICreateCategoryService): void {
     const categoryAlreadExists = this.categoryRepositorie.categoryExists(name);
