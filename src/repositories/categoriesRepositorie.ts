@@ -28,6 +28,11 @@ class CategoryRepositorie {
   list(): Category[] {
     return this.categories;
   }
+
+  categoryExists(name: string): Category | undefined {
+    const category = this.categories.find((categorie) => categorie.name === name);
+    return category;
+  }
 }
 
 export { CategoryRepositorie };
