@@ -1,18 +1,18 @@
 import { Request, Response, Router } from 'express';
 import { CategoryRepositorie } from '../repositories/categoriesRepositorie';
+import { CreateCategoryService } from '../services/createCategoryService';
 
 const categoriesRoutes = Router();
 const categoryRepositorie = new CategoryRepositorie();
 
+/** Aqui é aplicado o single resposability principle, pois essa rota tem só uma funcionalidade,
+ * que chamar o serviço que cria uma categoria
+ */
 categoriesRoutes.post('/', (req: Request, res: Response) => {
   const { name, description } = req.body;
-  const categoryAlreadExists = categoryRepositorie.categoryExists(name);
+  const createCategoryService = new CreateCategoryService(categoryRepositorie);
 
-  if (categoryAlreadExists) {
-    return res.status(400).send({ error: 'Category alread exists.' });
-  }
-
-  categoryRepositorie.create({ name, description });
+  createCategoryService.excute({ name, description });
 
   return res.status(201).send();
 });
