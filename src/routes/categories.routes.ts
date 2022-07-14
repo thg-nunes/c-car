@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { CategoryRepositorie } from '../modules/cars/repositories/categoriesRepositorie';
-import { CreateCategoryService } from '../modules/cars/services/createCategoryService';
+import { createCategoryController } from '../modules/cars/useCases/createCategory';
 
 const categoriesRoutes = Router();
 const categoryRepositorie = new CategoryRepositorie();
@@ -9,12 +9,7 @@ const categoryRepositorie = new CategoryRepositorie();
  * que chamar o serviço que cria uma categoria
  */
 categoriesRoutes.post('/', (req: Request, res: Response) => {
-  const { name, description } = req.body;
-  const createCategoryService = new CreateCategoryService(categoryRepositorie);
-
-  createCategoryService.excute({ name, description });
-
-  return res.status(201).send();
+  return createCategoryController.handle(req, res);
 });
 
 categoriesRoutes.get('/', (req: Request, res: Response) => {

@@ -1,16 +1,16 @@
-import { IRepositorie } from '../repositories/ICategoriesRepository';
+import { IRepositorie } from '../../repositories/ICategoriesRepository';
 
-interface ICreateCategoryService {
+interface ICreateCategoryUseCase {
   name: string;
   description: string;
 }
 
 /** Aqui é aplicado o single resposability principle,
  * pois essa classe tem só uma funcionalidade, que é criar uma categoria */
-class CreateCategoryService {
+class CreateCategoryUseCase {
   constructor(private categoryRepositorie: IRepositorie) {}
 
-  excute({ name, description }: ICreateCategoryService): void {
+  excute({ name, description }: ICreateCategoryUseCase): void {
     const categoryAlreadExists = this.categoryRepositorie.categoryExists(name);
 
     if (categoryAlreadExists) {
@@ -21,4 +21,4 @@ class CreateCategoryService {
   }
 }
 
-export { CreateCategoryService };
+export { CreateCategoryUseCase };
