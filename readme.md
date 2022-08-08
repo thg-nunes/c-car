@@ -12,7 +12,7 @@
   -- aqui são feitas as implementações dos repositories
 
 ## UseCases
-  -- são as regras de negócio da aplicação, ou seja, as operações(listagem, cadastro, deleção...) possíveis de executar nas rotas
+  -- são as regras de negócio da aplicação, ou seja, as funcionalidades da aplicação
   -- nos arquivos ...UseCase faço as chamadas pros repositories
   -- nos arquivos ...Controller faço a chamada pros arquivos ...UseCase
   # controllers -> chamam e dependem de -> usecases -> chamam e dependem de -> repositories
