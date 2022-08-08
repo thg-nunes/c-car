@@ -1,12 +1,13 @@
-import multer from 'multer'
+import multer from 'multer';
 
 import { Request, Response, Router } from 'express';
 import { createCategoryController } from '../modules/cars/useCases/createCategory';
-import { listCategoriesController } from '../modules/cars/useCases/listCategories';
+import { listCategoriesController } from '../modules/cars/useCases/listCategory';
+import { importCategoryController } from '../modules/cars/useCases/importCategory';
 
 const upload = multer({
-  dest: './tmp'
-})
+  dest: './tmp',
+});
 
 const categoriesRoutes = Router();
 
@@ -22,7 +23,7 @@ categoriesRoutes.get('/', (req: Request, res: Response) => {
 });
 
 categoriesRoutes.post('/import', upload.single('file'), (req: Request, res: Response) => {
-  return res.send()
+  return importCategoryController.handle(req, res);
 });
 
 export { categoriesRoutes };
