@@ -10,8 +10,8 @@ interface ICreateCategoryUseCase {
 class CreateCategoryUseCase {
   constructor(private categoryRepositorie: IRepositorie) {}
 
-  excute({ name, description }: ICreateCategoryUseCase): void {
-    const categoryAlreadExists = this.categoryRepositorie.categoryExists(name);
+  async excute({ name, description }: ICreateCategoryUseCase): Promise<void> {
+    const categoryAlreadExists = await this.categoryRepositorie.categoryExists(name);
 
     if (categoryAlreadExists) {
       throw new Error('Category already exists.');

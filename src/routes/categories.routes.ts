@@ -1,7 +1,7 @@
 import multer from 'multer';
 
 import { Request, Response, Router } from 'express';
-import { createCategoryController } from '../modules/cars/useCases/createCategory';
+import createCategoryController from '../modules/cars/useCases/createCategory';
 import { listCategoriesController } from '../modules/cars/useCases/listCategory';
 import { importCategoryController } from '../modules/cars/useCases/importCategory';
 
@@ -15,7 +15,7 @@ const categoriesRoutes = Router();
  * que chamar o serviço que cria uma categoria
  */
 categoriesRoutes.post('/', (req: Request, res: Response) => {
-  return createCategoryController.handle(req, res);
+  return createCategoryController().handle(req, res);
 });
 
 categoriesRoutes.get('/', (req: Request, res: Response) => {

@@ -5,18 +5,8 @@ import { ICreateCategoryDTO, IRepositorie } from './ICategoriesRepository';
 class CategoryRepositorie implements IRepositorie {
   private repositorie: Repository<Category>;
 
-  private static INSTANCE: CategoryRepositorie;
-
-  private constructor() {
+  constructor() {
     this.repositorie = getRepository(Category);
-  }
-
-  static get instance(): CategoryRepositorie {
-    if (!CategoryRepositorie.INSTANCE) {
-      CategoryRepositorie.INSTANCE = new CategoryRepositorie();
-    }
-
-    return CategoryRepositorie.INSTANCE;
   }
 
   async create({ name, description }: ICreateCategoryDTO): Promise<void> {
