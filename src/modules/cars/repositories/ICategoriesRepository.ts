@@ -1,4 +1,4 @@
-import { Category } from '../model/category';
+import { Category } from '../entities/category';
 
 // DTO - data transfer object: é um objeto responsável por capturar os dados de uma rota e passá-los para uma classe
 interface ICreateCategoryDTO {
@@ -10,9 +10,9 @@ interface ICreateCategoryDTO {
  * classes que são de um mesmo subtipo.
  */
 interface IRepositorie {
-  create({ name, description }: ICreateCategoryDTO): void;
-  list(): Category[];
-  categoryExists(name: string): Category | undefined;
+  create({ name, description }: ICreateCategoryDTO): Promise<void>;
+  list(): Promise<Category[]>;
+  categoryExists(name: string): Promise<Category | undefined>;
 }
 
 export { IRepositorie, ICreateCategoryDTO };

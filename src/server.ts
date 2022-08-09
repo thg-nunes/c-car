@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import express from 'express';
 import { categoriesRoutes } from './routes/categories.routes';
 import { specificationRoutes } from './routes/specification.routes';
