@@ -18,12 +18,12 @@ categoriesRoutes.post('/', (req: Request, res: Response) => {
   return createCategoryController().handle(req, res);
 });
 
-categoriesRoutes.get('/', (req: Request, res: Response) => {
-  return listCategoriesController.handle(req, res);
-});
+// categoriesRoutes.get('/', (req: Request, res: Response) => {
+//   return listCategoriesController.handle(req, res);
+// });
 
-categoriesRoutes.post('/import', upload.single('file'), (req: Request, res: Response) => {
-  return importCategoryController.handle(req, res);
-});
+// categoriesRoutes.post('/import', upload.single('file'), (req: Request, res: Response) => {
+//   return importCategoryController.handle(req, res);
+// });
 
 export { categoriesRoutes };
