@@ -9,22 +9,20 @@ services:
     ports:
       - 5432:5432
 
-    volumes:
-      - pg_database:/data/postegres
-
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root@th
       - POSTGRES_DB=c-car
-
-    network_mode: host
 
   app:
     container_name: c-car
 
     build: .
 
-    network_mode: host
+    links:
+      - database_c-car
+
+    restart: always
 
     ports:
       - 3333:3333
@@ -34,7 +32,3 @@ services:
 
     depends_on:
       - database_c-car
-
-volumes:
-  pg_database:
-    driver: local
