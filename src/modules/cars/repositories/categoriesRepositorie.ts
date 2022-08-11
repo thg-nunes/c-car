@@ -24,7 +24,11 @@ class CategoryRepositorie implements IRepositorie {
   }
 
   async categoryExists(name: string): Promise<Category | undefined> {
-    const category = this.repositorie.findOne({ name });
+    const category = this.repositorie.findOne({
+      where: {
+        name,
+      },
+    });
     return category;
   }
 }
