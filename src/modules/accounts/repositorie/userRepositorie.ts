@@ -1,4 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
+import { hash } from 'bcrypt';
+
 import { User } from '../entities/user';
 import { ICreateUser, ICreateUserDTO } from '../protocols/iCreateUserProtocol';
 
@@ -10,7 +12,9 @@ class UserRepositorie implements ICreateUser {
   }
 
   async create({ ...data }: ICreateUserDTO): Promise<void> {
-    const user = await this.repositorie.create({ ...data });
+    const passwordHash = await hash(data.password, 8);
+
+    const user = await this.repositorie.create({ ...data, password: passwordHash });
 
     this.repositorie.save(user);
   }
