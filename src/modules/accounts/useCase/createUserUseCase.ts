@@ -1,6 +1,7 @@
-import { inject } from 'tsyringe';
+import { inject, injectable } from 'tsyringe';
 import { ICreateUser, ICreateUserDTO } from '../protocols/iCreateUserProtocol';
 
+@injectable()
 class CreateUserUseCase {
   constructor(
     @inject('UserRepositorie')
