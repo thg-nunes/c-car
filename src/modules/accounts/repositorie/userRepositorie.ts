@@ -18,6 +18,16 @@ class UserRepositorie implements ICreateUser {
 
     this.repositorie.save(user);
   }
+
+  async findByEmail(email: string): Promise<User | undefined> {
+    const user = await this.repositorie.findOne({
+      where: {
+        email,
+      },
+    });
+
+    return user;
+  }
 }
 
 export { UserRepositorie };

@@ -1,3 +1,5 @@
+import { User } from '../entities/user';
+
 export type ICreateUserDTO = {
   name: string;
   username: string;
@@ -8,6 +10,7 @@ export type ICreateUserDTO = {
 
 interface ICreateUser {
   create(data: ICreateUserDTO): Promise<void>;
+  findByEmail(email: string): Promise<User | undefined>;
 }
 
 export { ICreateUser };
