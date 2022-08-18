@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import { ICreateUser, ICreateUserDTO } from '../protocols/iCreateUserProtocol';
+import { ICreateUser, ICreateUserDTO } from '../../protocols/iCreateUserProtocol';
 
 @injectable()
 class CreateUserUseCase {
