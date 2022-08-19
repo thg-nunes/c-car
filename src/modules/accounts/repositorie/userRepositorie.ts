@@ -28,6 +28,16 @@ class UserRepositorie implements ICreateUser {
 
     return user;
   }
+
+  async findById(id: string): Promise<User | undefined> {
+    const user = this.repositorie.findOne({
+      where: {
+        id,
+      },
+    });
+
+    return user;
+  }
 }
 
 export { UserRepositorie };
