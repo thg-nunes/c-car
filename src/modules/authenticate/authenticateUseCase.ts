@@ -23,7 +23,7 @@ class AuthenticateUseCase {
       throw new Error('Email or password incorrect.');
     }
 
-    const passwordMatch = compare(password, userExists.password);
+    const passwordMatch = await compare(password, userExists.password);
 
     if (!passwordMatch) {
       throw new Error('Email or password incorrect.');
