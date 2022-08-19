@@ -36,6 +36,7 @@ class AuthenticateUseCase {
       },
       process.env.KEY_TOKEN_GENERATE as string,
       {
+        subject: userExists.id,
         expiresIn: '1d',
       },
     );
