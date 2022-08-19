@@ -1,5 +1,6 @@
 import 'reflect-metadata';
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
+import 'express-async-errors';
 import { categoriesRoutes } from './routes/categories.routes';
 import { specificationRoutes } from './routes/specification.routes';
 import { usersRoutes } from './routes/users.routes';
@@ -7,6 +8,7 @@ import { usersRoutes } from './routes/users.routes';
 import './database';
 import './shared/container';
 import { authenticateRoutes } from './routes/athenticate.routes';
+import { AppError } from './middlewares/errors/AppError';
 
 const app = express();
 
@@ -16,5 +18,18 @@ app.use('/categories', categoriesRoutes);
 app.use('/specification', specificationRoutes);
 app.use('/users', usersRoutes);
 app.use(authenticateRoutes);
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction): Response => {
+  if (err instanceof AppError) {
+    return res.status(err.statusCode).json({
+      message: err.message,
+    });
+  }
+
+  return res.status(500).json({
+    status: 'error',
+    message: `Internal server error ${err.message}`,
+  });
+});
 
 app.listen(3333, () => console.log('server runing on port 3333'));

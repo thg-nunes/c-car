@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+import { AppError } from '../../../../middlewares/errors/AppError';
 import { ICreateUser, ICreateUserDTO } from '../../protocols/iCreateUserProtocol';
 
 @injectable()
@@ -12,7 +13,7 @@ class CreateUserUseCase {
     const user_already_exists = await this.createUser.findByEmail(data.email);
 
     if (user_already_exists) {
-      throw new Error('Esse email ja existe.');
+      throw new AppError('Email already existe.');
     }
 
     await this.createUser.create({ ...data });

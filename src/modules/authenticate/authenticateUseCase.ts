@@ -3,6 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import { sign } from 'jsonwebtoken';
 
 import { UserRepositorie } from '../accounts/repositorie/userRepositorie';
+import { AppError } from '../../middlewares/errors/AppError';
 
 type UserData = {
   email: string;
@@ -20,13 +21,13 @@ class AuthenticateUseCase {
     const userExists = await this.userRepository.findByEmail(email);
 
     if (!userExists) {
-      throw new Error('Email or password incorrect.');
+      throw new AppError('Email or password incorrect.', 401);
     }
 
     const passwordMatch = await compare(password, userExists.password);
 
     if (!passwordMatch) {
-      throw new Error('Email or password incorrect.');
+      throw new AppError('Email or password incorrect.', 401);
     }
 
     const token = sign(
