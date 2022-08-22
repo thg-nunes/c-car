@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
-import { UserRepositorie } from '../modules/accounts/repositorie/userRepositorie';
-import { AppError } from './errors/AppError';
+import { UserRepositorie } from '../../modules/accounts/infra/typeorm/repositorie/userRepositorie';
+import { AppError } from '../errors/AppError';
 
 async function authUser(req: Request, res: Response, next: NextFunction) {
   const token = req.headers.authorization;
