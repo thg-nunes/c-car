@@ -1,14 +1,15 @@
 import 'reflect-metadata';
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
-import { categoriesRoutes } from './shared/infra/http/routes/categories.routes';
-import { specificationRoutes } from './shared/infra/http/routes/specification.routes';
-import { usersRoutes } from './shared/infra/http/routes/users.routes';
+import { categoriesRoutes } from './routes/categories.routes';
+import { specificationRoutes } from './routes/specification.routes';
+import { usersRoutes } from './routes/users.routes';
 
-import './shared/infra/typeorm';
-import './shared/container';
-import { authenticateRoutes } from './shared/infra/http/routes/athenticate.routes';
-import { AppError } from './shared/errors/AppError';
+import '../../infra/typeorm/';
+import '../../container';
+
+import { authenticateRoutes } from './routes/athenticate.routes';
+import { AppError } from '../../errors/AppError';
 
 const app = express();
 

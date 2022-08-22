@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
-import { authUser } from '../middlewares/authUser';
-import { SpecificationRepository } from '../modules/cars/infra/typeorm/repositories/specificationRepository';
-import { CreateSpecificationService } from '../modules/cars/services/createSpecificationService';
+import { authUser } from '../../../middlewares/authUser';
+import { SpecificationRepository } from '../../../../modules/cars/infra/typeorm/repositories/specificationRepository';
+import { CreateSpecificationService } from '../../../../modules/cars/services/createSpecificationService';
 
 const specificationRoutes = Router();
 const specificationRepository = new SpecificationRepository();
