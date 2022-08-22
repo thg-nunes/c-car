@@ -1,4 +1,4 @@
-import { AppError } from '../../../middlewares/errors/AppError';
+import { AppError } from '../../../shared/errors/AppError';
 import { ISpecificationRepository } from '../infra/typeorm/repositories/iSpecificationRepository';
 
 interface IRequest {

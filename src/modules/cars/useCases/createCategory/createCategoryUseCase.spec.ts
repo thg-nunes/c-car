@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { CreateCategoryUseCase } from '../createCategory/createCategoryUseCase';
 import { Category } from '../../infra/typeorm/entities/category';
 import { ICreateCategoryDTO, IRepositorie } from '../../infra/typeorm/repositories/ICategoriesRepository';
-import { AppError } from '../../../../middlewares/errors/AppError';
+import { AppError } from '../../../../shared/errors/AppError';
 
 const mockCategoryRepository = () => {
   class CategoryRepositorie implements IRepositorie {

@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import { AppError } from '../../../../middlewares/errors/AppError';
+import { AppError } from '../../../../shared/errors/AppError';
 import { IRepositorie } from '../../infra/typeorm/repositories/ICategoriesRepository';
 
 interface ICreateCategoryUseCase {
