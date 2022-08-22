@@ -27,10 +27,14 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction): Response 
     });
   }
 
-  return res.status(500).json({
-    status: 'error',
-    message: `Internal server error ${err.message}`,
-  });
+  if (err instanceof AppError === false) {
+    return res.status(500).json({
+      status: 'error',
+      message: `Internal server error ${err.message}`,
+    });
+  }
+
+  next();
 });
 
 app.listen(3333, () => console.log('server runing on port 3333'));
