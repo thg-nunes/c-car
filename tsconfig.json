@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es2016",
     "experimentalDecorators": true,
+    "target": "es2016","experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "module": "commonjs",
     "resolveJsonModule": true,
@@ -11,6 +12,7 @@
     "strictPropertyInitialization": false,
     "skipLibCheck": true
   },
+  "exclude": ["./node_modules", "./coverage"],
   "include": [
     "./src"
   ]
