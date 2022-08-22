@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { Category } from '../../entities/category';
 import { ListCategoriesUseCase } from './listCategoriesUseCase';
 
 class ListCategoriesController {
