@@ -2,7 +2,7 @@ import { getRepository, Repository } from 'typeorm';
 import { hash } from 'bcrypt';
 
 import { User } from '../entities/user';
-import { ICreateUser, ICreateUserDTO } from '../protocols/iCreateUserProtocol';
+import { ICreateUser, ICreateUserDTO } from '../../../protocols/iCreateUserProtocol';
 
 class UserRepositorie implements ICreateUser {
   private repositorie: Repository<User>;

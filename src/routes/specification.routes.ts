@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { authUser } from '../middlewares/authUser';
-import { SpecificationRepository } from '../modules/cars/repositories/specificationRepository';
+import { SpecificationRepository } from '../modules/cars/infra/typeorm/repositories/specificationRepository';
 import { CreateSpecificationService } from '../modules/cars/services/createSpecificationService';
 
 const specificationRoutes = Router();

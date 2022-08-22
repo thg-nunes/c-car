@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import { AppError } from '../../../../middlewares/errors/AppError';
+import { AppError } from '../../../../shared/errors/AppError';
 import { ICreateUser, ICreateUserDTO } from '../../protocols/iCreateUserProtocol';
 
 @injectable()

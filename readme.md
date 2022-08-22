@@ -21,3 +21,9 @@
 ## Controllers
   -- são classes que recebem a requisição, executam a regra para aquela rota e retornam a resposta
 
+## Entities
+  -- faz o mapeamento das colunas de uma tabela
+
+## Infra
+  -- diretorio onde ficam todas as ferramentas usadas na aplicação
+  -- desacopla o codigo e facilita a mudança de bibliotecas quando necessario

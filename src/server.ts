@@ -5,10 +5,10 @@ import { categoriesRoutes } from './routes/categories.routes';
 import { specificationRoutes } from './routes/specification.routes';
 import { usersRoutes } from './routes/users.routes';
 
-import './database';
-import './shared/container';
+import '../typeorm';
+import '../../container';
 import { authenticateRoutes } from './routes/athenticate.routes';
-import { AppError } from './middlewares/errors/AppError';
+import { AppError } from './shared/errors/AppError';
 
 const app = express();
 
@@ -26,10 +26,14 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction): Response 
     });
   }
 
-  return res.status(500).json({
-    status: 'error',
-    message: `Internal server error ${err.message}`,
-  });
+  if (err instanceof AppError === false) {
+    return res.status(500).json({
+      status: 'error',
+      message: `Internal server error ${err.message}`,
+    });
+  }
+
+  next();
 });
 
 app.listen(3333, () => console.log('server runing on port 3333'));

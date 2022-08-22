@@ -1,4 +1,4 @@
-import { CategoryRepositorie } from '../../repositories/categoriesRepositorie';
+import { CategoryRepositorie } from '../../infra/typeorm/repositories/categoriesRepositorie';
 import { CreateCategoryController } from './createCategoryController';
 import { CreateCategoryUseCase } from './createCategoryUseCase';
 
@@ -7,7 +7,7 @@ export default (): CreateCategoryController => {
 
   const createCategoryUseCase = new CreateCategoryUseCase(categoryRepositorie);
 
-  const createCategoryController = new CreateCategoryController(createCategoryUseCase);
+  const createCategoryController = new CreateCategoryController();
 
   return createCategoryController;
 };

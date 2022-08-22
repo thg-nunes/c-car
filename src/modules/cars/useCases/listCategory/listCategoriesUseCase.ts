@@ -1,10 +1,10 @@
-import { Category } from '../../entities/category';
-import { CategoryRepositorie } from '../../repositories/categoriesRepositorie';
+import { Category } from '../../infra/typeorm/entities/category';
+import { CategoryRepositorie } from '../../infra/typeorm/repositories/categoriesRepositorie';
 
 class ListCategoriesUseCase {
   constructor(private categoryRepositorie: CategoryRepositorie) {}
 
-  execute(): Category[] {
+  execute(): Promise<Category[]> {
     const repositories = this.categoryRepositorie.list();
 
     return repositories;
