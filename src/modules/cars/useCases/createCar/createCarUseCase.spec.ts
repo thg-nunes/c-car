@@ -9,7 +9,6 @@ describe('CreateCarUseCase class', () => {
     const sut = new CreateCarUseCase(carRepository);
 
     const car: Car = {
-      id: 'any_id',
       name: 'any_name',
       description: 'any_description',
       brand: 'any_brand',
@@ -17,7 +16,6 @@ describe('CreateCarUseCase class', () => {
       license_plate: 'any_license_plate',
       daily_rate: 100,
       fine_amount: 20,
-      created_at: new Date(),
     };
 
     await sut.execute(car);
@@ -31,7 +29,6 @@ describe('CreateCarUseCase class', () => {
       const sut = new CreateCarUseCase(carRepository);
 
       const car: Car = {
-        id: 'any_id',
         name: 'any_name',
         description: 'any_description',
         brand: 'any_brand',
@@ -39,11 +36,29 @@ describe('CreateCarUseCase class', () => {
         license_plate: 'any_license_plate',
         daily_rate: 100,
         fine_amount: 20,
-        created_at: new Date(),
       };
 
       await sut.execute(car);
       await sut.execute(car);
     }).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should have available true by default', async () => {
+    const carRepositoryInMemory = new CarRepositoryInMemory();
+    const sut = new CreateCarUseCase(carRepositoryInMemory);
+
+    const car: Car = {
+      name: 'any_name',
+      description: 'any_description',
+      brand: 'any_brand',
+      category_id: 'any_category_id',
+      license_plate: 'any_license_plate',
+      daily_rate: 100,
+      fine_amount: 20,
+    };
+
+    const response = await sut.execute(car);
+
+    expect(response).toHaveProperty('available', true);
   });
 });
