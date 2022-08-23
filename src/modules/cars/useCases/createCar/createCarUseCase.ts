@@ -5,14 +5,16 @@ import { ICarRepositorie } from '../../infra/protocols/iCarRepositorie';
 class CreateCarUseCase {
   constructor(private carRepository: ICarRepositorie) {}
 
-  async execute({ ...data }: Car): Promise<void> {
+  async execute({ ...data }: Car): Promise<Car | void> {
     const carAlreadyExists = await this.carRepository.findByLicensePlate(data.license_plate);
 
     if (carAlreadyExists) {
       throw new AppError('Car already exists');
     }
 
-    await this.carRepository.create(data);
+    const car = await this.carRepository.create({ ...data });
+
+    return car;
   }
 }
 

@@ -1,4 +1,5 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import { v4 as uuid } from 'uuid';
 
 @Entity()
 class CarEntity {
@@ -10,6 +11,9 @@ class CarEntity {
 
   @Column()
   name: string;
+
+  @Column()
+  available: boolean;
 
   @Column()
   description: string;
@@ -28,6 +32,14 @@ class CarEntity {
 
   @CreateDateColumn()
   created_at: Date;
+
+  constructor() {
+    if (!this.id) {
+      this.id = uuid();
+      this.created_at = new Date();
+      this.available = true;
+    }
+  }
 }
 
 export { CarEntity };
