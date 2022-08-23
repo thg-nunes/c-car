@@ -12,6 +12,14 @@ class CreateCategoryController {
 
     return res.status(201).send();
   }
+
+  async getCategories(req: Request, res: Response): Promise<Response> {
+    const categoriesUseCase = container.resolve(CreateCategoryUseCase);
+
+    const categories = await categoriesUseCase.categories();
+
+    return res.json(categories);
+  }
 }
 
 export { CreateCategoryController };

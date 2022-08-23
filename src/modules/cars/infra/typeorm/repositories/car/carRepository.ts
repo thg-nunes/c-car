@@ -11,7 +11,7 @@ class CarRepository implements ICarRepositorie {
   }
 
   async create(data: Car): Promise<Car> {
-    const car = await this.repository.create({
+    const car = this.repository.create({
       ...data,
     });
 
@@ -21,7 +21,7 @@ class CarRepository implements ICarRepositorie {
   }
 
   async findByLicensePlate(license_plate: string): Promise<Car> {
-    const car = this.repository.findOne({
+    const car = await this.repository.findOne({
       where: {
         license_plate,
       },

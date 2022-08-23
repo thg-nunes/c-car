@@ -5,6 +5,7 @@ const categoriesRoutes = Router();
 
 const createCategoryController = new CreateCategoryController();
 
+categoriesRoutes.get('/', createCategoryController.getCategories);
 categoriesRoutes.post('/', createCategoryController.handle);
 
 export { categoriesRoutes };

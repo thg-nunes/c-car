@@ -1,5 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../shared/errors/AppError';
+import { Category } from '../../infra/typeorm/entities/category';
 import { IRepositorie } from '../../infra/typeorm/repositories/ICategoriesRepository';
 
 interface ICreateCategoryUseCase {
@@ -24,6 +25,12 @@ class CreateCategoryUseCase {
     }
 
     this.categoryRepositorie.create({ name, description });
+  }
+
+  async categories(): Promise<Category[]> {
+    const categories = await this.categoryRepositorie.list();
+
+    return categories;
   }
 }
 
