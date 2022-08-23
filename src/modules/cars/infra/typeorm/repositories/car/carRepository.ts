@@ -10,12 +10,14 @@ class CarRepository implements ICarRepositorie {
     this.repository = getRepository(CarEntity);
   }
 
-  async create(data: Car): Promise<void> {
+  async create(data: Car): Promise<Car> {
     const car = await this.repository.create({
       ...data,
     });
 
     await this.repository.save(car);
+
+    return car;
   }
 
   async findByLicensePlate(license_plate: string): Promise<Car> {
