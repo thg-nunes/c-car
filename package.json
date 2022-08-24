@@ -7,7 +7,8 @@
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn ./src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
     "test": "jest --watch",
-    "test:c": "jest --coverage"
+    "test:c": "jest --coverage",
+    "seed:admin": "ts-node-dev src/shared/infra/typeorm/seed/create-admin.ts"
   },
   "keywords": [],
   "author": "thiago",
