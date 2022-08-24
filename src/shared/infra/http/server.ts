@@ -5,8 +5,11 @@ import { categoriesRoutes } from './routes/categories.routes';
 import { specificationRoutes } from './routes/specification.routes';
 import { usersRoutes } from './routes/users.routes';
 
-import '../../infra/typeorm/';
+import createConnection from '../typeorm';
+
 import '../../container';
+
+createConnection();
 
 import { authenticateRoutes } from './routes/athenticate.routes';
 import { AppError } from '../../errors/AppError';
