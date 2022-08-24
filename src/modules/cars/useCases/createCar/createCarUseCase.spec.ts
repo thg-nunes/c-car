@@ -9,6 +9,7 @@ describe('CreateCarUseCase class', () => {
     const sut = new CreateCarUseCase(carRepository);
 
     const car: Car = {
+      available: true,
       name: 'any_name',
       description: 'any_description',
       brand: 'any_brand',
@@ -30,6 +31,7 @@ describe('CreateCarUseCase class', () => {
 
       const car: Car = {
         name: 'any_name',
+        available: true,
         description: 'any_description',
         brand: 'any_brand',
         category_id: 'any_category_id',
@@ -50,6 +52,7 @@ describe('CreateCarUseCase class', () => {
     const car: Car = {
       name: 'any_name',
       description: 'any_description',
+      available: true,
       brand: 'any_brand',
       category_id: 'any_category_id',
       license_plate: 'any_license_plate',

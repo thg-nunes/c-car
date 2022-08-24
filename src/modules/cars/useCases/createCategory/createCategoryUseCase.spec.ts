@@ -71,4 +71,24 @@ describe('CreateCategoryUseCase', () => {
       await sut.excute(category);
     }).rejects.toBeInstanceOf(AppError);
   });
+
+  it('', async () => {
+    const categoryRepositorie = mockCategoryRepository();
+
+    categoryRepositorie.create({
+      name: 'SUV',
+      description: 'any_description_suv',
+    });
+
+    categoryRepositorie.create({
+      name: 'sport',
+      description: 'any_description_sport',
+    });
+
+    const sut = new CreateCategoryUseCase(categoryRepositorie);
+
+    const categories = await sut.categories();
+
+    expect(categories.length).toBe(2);
+  });
 });
