@@ -1,4 +1,5 @@
 type Car = {
+  id?: string;
   name: string;
   available: boolean;
   description: string;

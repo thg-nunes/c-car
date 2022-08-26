@@ -1,4 +1,4 @@
-import { Category } from '../entities/category';
+import { Category } from '../typeorm/entities/category';
 
 // DTO - data transfer object: é um objeto responsável por capturar os dados de uma rota e passá-los para uma classe
 interface ICreateCategoryDTO {

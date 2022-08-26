@@ -1,5 +1,5 @@
 import { Category } from '../../infra/typeorm/entities/category';
-import { CategoryRepositorie } from '../../infra/typeorm/repositories/categoriesRepositorie';
+import { CategoryRepositorie } from '../../infra/typeorm/repositories/category/categoriesRepositorie';
 
 class ListCategoriesUseCase {
   constructor(private categoryRepositorie: CategoryRepositorie) {}

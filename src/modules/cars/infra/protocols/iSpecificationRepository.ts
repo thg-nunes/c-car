@@ -1,4 +1,4 @@
-import { Specification } from '../entities/specification';
+import { Specification } from '../typeorm/entities/specification';
 
 interface ISpecificatiionDTO {
   name: string;
