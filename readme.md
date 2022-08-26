@@ -27,3 +27,6 @@
 ## Infra
   -- diretorio onde ficam todas as ferramentas usadas na aplicação
   -- desacopla o codigo e facilita a mudança de bibliotecas quando necessario
+
+## Seed
+  -- modelo de sql pronto para manipular uma coluna/tabela na base de dados

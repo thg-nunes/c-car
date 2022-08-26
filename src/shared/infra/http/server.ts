@@ -13,7 +13,7 @@ createConnection();
 
 import { authenticateRoutes } from './routes/athenticate.routes';
 import { AppError } from '../../errors/AppError';
-import { cars } from './routes/create-cars.routes';
+import { cars } from './routes/cars.routes';
 
 const app = express();
 
