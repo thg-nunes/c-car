@@ -1,17 +1,17 @@
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from 'typeorm';
 
-export class CategoriesCars1661532849945 implements MigrationInterface {
+export class SpecificationsCars1661532849945 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'categories_cars',
+        name: 'specifications_cars',
         columns: [
           {
             name: 'car_id',
             type: 'uuid',
           },
           {
-            name: 'category_id',
+            name: 'specification_id',
             type: 'uuid',
           },
           {
@@ -24,9 +24,9 @@ export class CategoriesCars1661532849945 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      'categories_cars',
+      'specifications_cars',
       new TableForeignKey({
-        name: 'FKCarCategory',
+        name: 'FKCarSpecification',
         referencedTableName: 'cars',
         referencedColumnNames: ['id'],
         columnNames: ['car_id'],
@@ -36,12 +36,12 @@ export class CategoriesCars1661532849945 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      'categories_cars',
+      'specifications_cars',
       new TableForeignKey({
-        name: 'FKCategoryCar',
-        referencedTableName: 'categories',
+        name: 'FKSpecificationCar',
+        referencedTableName: 'specification',
         referencedColumnNames: ['id'],
-        columnNames: ['category_id'],
+        columnNames: ['specification_id'],
         onDelete: 'SET NULL',
         onUpdate: 'SET NULL',
       }),
@@ -49,10 +49,10 @@ export class CategoriesCars1661532849945 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('categories_cars', 'FKCategoryCar');
+    await queryRunner.dropForeignKey('specifications_cars', 'FKSpecificationCar');
 
-    await queryRunner.dropForeignKey('categories_cars', 'FKCarCategory');
+    await queryRunner.dropForeignKey('specifications_cars', 'FKCarSpecification');
 
-    await queryRunner.dropTable('categories_cars');
+    await queryRunner.dropTable('specifications_cars');
   }
 }
