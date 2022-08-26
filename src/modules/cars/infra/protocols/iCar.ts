@@ -1,5 +1,6 @@
 type Car = {
   name: string;
+  available: boolean;
   description: string;
   daily_rate: number;
   license_plate: string;
