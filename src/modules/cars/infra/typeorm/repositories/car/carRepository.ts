@@ -10,7 +10,7 @@ class CarRepository implements ICarRepositorie {
     this.repository = getRepository(CarEntity);
   }
 
-  async create(data: Car): Promise<Car> {
+  async create(data: Car): Promise<CarEntity> {
     const car = this.repository.create({
       ...data,
     });
@@ -20,7 +20,7 @@ class CarRepository implements ICarRepositorie {
     return car;
   }
 
-  async findByLicensePlate(license_plate: string): Promise<Car> {
+  async findByLicensePlate(license_plate: string): Promise<CarEntity> {
     const car = await this.repository.findOne({
       where: {
         license_plate,
@@ -30,7 +30,7 @@ class CarRepository implements ICarRepositorie {
     return car;
   }
 
-  async listAllAvailable(): Promise<Car[]> {
+  async listAllAvailable(): Promise<CarEntity[]> {
     const cars_availables = await this.repository.find({
       where: {
         available: true,
@@ -38,6 +38,11 @@ class CarRepository implements ICarRepositorie {
     });
 
     return cars_availables;
+  }
+
+  async findById(car_id: string): Promise<CarEntity> {
+    const car = await this.repository.findOne({ id: car_id });
+    return car;
   }
 }
 
