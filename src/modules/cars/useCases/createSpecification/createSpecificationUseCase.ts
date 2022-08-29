@@ -1,4 +1,5 @@
 import { AppError } from '../../../../shared/errors/AppError';
+import { Car } from '../../infra/protocols/iCar';
 import { ICarRepositorie } from '../../infra/protocols/iCarRepositorie';
 import { ISpecificationRepository } from '../../infra/protocols/iSpecificationRepository';
 
@@ -10,7 +11,7 @@ interface IRequest {
 class CreateSpecificationUseCase {
   constructor(private carRepositorie: ICarRepositorie, private specificationRepository: ISpecificationRepository) {}
 
-  async execute({ car_id, specification_id }: IRequest) {
+  async execute({ car_id, specification_id }: IRequest): Promise<Car> {
     const car_exists = await this.carRepositorie.findById(car_id);
 
     if (!car_exists) {
@@ -22,6 +23,8 @@ class CreateSpecificationUseCase {
     car_exists.specification = specifications;
 
     await this.carRepositorie.create(car_exists);
+
+    return car_exists;
   }
 }
 

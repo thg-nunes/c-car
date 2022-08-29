@@ -10,7 +10,7 @@ type Car = {
   fine_amount: number;
   brand: string;
   category_id: string;
-  descriptions?: Specification[];
+  specification?: Specification[];
 };
 
 export { Car };

@@ -1,33 +1,36 @@
 import { Specification } from '../entities/specification';
 import { ISpecificatiionDTO, ISpecificationRepository } from '../../protocols/iSpecificationRepository';
+import { getRepository, Repository } from 'typeorm';
 
 class SpecificationRepository implements ISpecificationRepository {
-  private specifications: Specification[];
+  private repository: Repository<Specification>;
 
   constructor() {
-    this.specifications = [];
+    this.repository = getRepository(Specification);
   }
 
   async create({ name, description }: ISpecificatiionDTO): Promise<void> {
-    const specification = new Specification();
-
-    Object.assign(specification, {
+    const specification = this.repository.create({
       name,
       description,
-      created_at: new Date(),
     });
 
-    this.specifications.push(specification);
+    await this.repository.save(specification);
   }
 
   async findByName(name: string): Promise<Specification | undefined> {
-    const sepecification = this.specifications.find((specification) => specification.name === name);
+    const sepecification = this.repository.findOne({
+      where: {
+        name,
+      },
+    });
 
     return sepecification;
   }
 
-  findByIds(ids: string[]): Promise<Specification[]> {
-    throw new Error('Method not implemented.');
+  async findByIds(ids: string[]): Promise<Specification[]> {
+    const specifications = await this.repository.findByIds(ids);
+    return specifications;
   }
 }
 

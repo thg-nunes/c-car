@@ -6,19 +6,23 @@ import { Specification } from '../../infra/typeorm/entities/specification';
 class SpecificationRepositoryInMemory implements ISpecificationRepository {
   specifications: Specification[] = [];
 
-  async create({ name, description }: ISpecificatiionDTO): Promise<void> {
+  async create({ name, description }: ISpecificatiionDTO): Promise<Specification> {
     const specificationAlreadyExists = this.specifications.find((specification) => specification.name === name);
 
     if (specificationAlreadyExists) {
       throw new AppError('Specification already exists!');
     }
 
-    this.specifications.push({
+    const specification = {
       id: uuid(),
-      created_at: new Date(),
       name,
       description,
-    });
+      created_at: new Date(),
+    };
+
+    this.specifications.push(specification);
+
+    return specification;
   }
 
   async findByName(name: string): Promise<Specification> {
