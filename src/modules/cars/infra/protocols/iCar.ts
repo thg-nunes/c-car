@@ -1,3 +1,5 @@
+import { Specification } from '../typeorm/entities/specification';
+
 type Car = {
   id?: string;
   name: string;
@@ -8,6 +10,7 @@ type Car = {
   fine_amount: number;
   brand: string;
   category_id: string;
+  descriptions?: Specification[];
 };
 
 export { Car };
