@@ -4,25 +4,18 @@ import { ISpecificationRepository } from '../../infra/protocols/iSpecificationRe
 
 interface IRequest {
   car_id: string;
-  name: string;
-  description: string;
+  specification_id: string;
 }
 
 class CreateSpecificationUseCase {
-  constructor(private carRepositorie: ICarRepositorie, specificationRepository: ISpecificationRepository) {}
+  constructor(private carRepositorie: ICarRepositorie, private specificationRepository: ISpecificationRepository) {}
 
-  async execute({ car_id, name, description }: IRequest) {
+  async execute({ car_id, specification_id }: IRequest) {
     const car_exists = await this.carRepositorie.findById(car_id);
 
     if (!car_exists) {
       throw new AppError('Car does not exists!');
     }
-
-    const specificationAlreadyExists = this.specificationRepository.findByName(name);
-
-    if (specificationAlreadyExists) throw new AppError('Specification already exists');
-
-    this.specificationRepository.create({ name, description });
   }
 }
 
