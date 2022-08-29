@@ -4,7 +4,7 @@ import { ISpecificationRepository } from '../../infra/protocols/iSpecificationRe
 
 interface IRequest {
   car_id: string;
-  specification_id: string;
+  specification_id: string[];
 }
 
 class CreateSpecificationUseCase {
@@ -16,6 +16,12 @@ class CreateSpecificationUseCase {
     if (!car_exists) {
       throw new AppError('Car does not exists!');
     }
+
+    const specifications = await this.specificationRepository.findByIds(specification_id);
+
+    car_exists.specification = specifications;
+
+    await this.carRepositorie.create(car_exists);
   }
 }
 
