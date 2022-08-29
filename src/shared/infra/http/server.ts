@@ -2,7 +2,6 @@ import 'reflect-metadata';
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 import { categoriesRoutes } from './routes/categories.routes';
-import { specificationRoutes } from './routes/specification.routes';
 import { usersRoutes } from './routes/users.routes';
 
 import createConnection from '../typeorm';
@@ -20,7 +19,6 @@ const app = express();
 app.use(express.json());
 
 app.use('/categories', categoriesRoutes);
-app.use('/specification', specificationRoutes);
 app.use('/users', usersRoutes);
 app.use('/cars', cars);
 app.use(authenticateRoutes);
