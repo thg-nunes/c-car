@@ -29,19 +29,28 @@ describe('CreateSpecification clas', () => {
 
   it('shold create an new car if car id exists', async () => {
     const car = await carRepositorieInMemory.create({
+      id: 'any_id',
       available: true,
-      brand: 'any_brand',
-      category_id: 'any_id',
-      daily_rate: 12,
+      name: 'any_name',
       description: 'any_description',
+      daily_rate: 12,
       fine_amount: 123,
       license_plate: 'any_license_plate',
-      name: 'any_name',
-      id: 'any_id',
+      brand: 'any_brand',
+      category_id: 'any_id',
     });
 
-    const specification_id = ['1234'];
+    const creating_specification = await specificationRepositoryInMemory.create({
+      name: 'any_name',
+      description: 'any_description',
+    });
 
-    await createSpecificationUseCase.execute({ car_id: car.id, specification_id });
+    const all_specifications = await createSpecificationUseCase.execute({
+      car_id: car.id,
+      specification_id: [creating_specification.id],
+    });
+
+    expect(all_specifications).toHaveProperty('specification');
+    expect(all_specifications.specification.length).toBe(1);
   });
 });
