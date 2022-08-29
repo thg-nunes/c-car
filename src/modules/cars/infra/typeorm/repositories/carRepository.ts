@@ -1,7 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
-import { Car } from '../../../protocols/iCar';
-import { ICarRepositorie } from '../../../protocols/iCarRepositorie';
-import { CarEntity } from '../../entities/cars';
+import { Car } from '../../protocols/iCar';
+import { ICarRepositorie } from '../../protocols/iCarRepositorie';
+import { CarEntity } from '../entities/cars';
 
 class CarRepository implements ICarRepositorie {
   private repository: Repository<CarEntity>;

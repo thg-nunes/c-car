@@ -1,5 +1,5 @@
-import { Specification } from '../../entities/specification';
-import { ISpecificatiionDTO, ISpecificationRepository } from '../../../protocols/iSpecificationRepository';
+import { Specification } from '../entities/specification';
+import { ISpecificatiionDTO, ISpecificationRepository } from '../../protocols/iSpecificationRepository';
 
 class SpecificationRepository implements ISpecificationRepository {
   private specifications: Specification[];
@@ -8,7 +8,7 @@ class SpecificationRepository implements ISpecificationRepository {
     this.specifications = [];
   }
 
-  create({ name, description }: ISpecificatiionDTO): void {
+  async create({ name, description }: ISpecificatiionDTO): Promise<void> {
     const specification = new Specification();
 
     Object.assign(specification, {
@@ -20,10 +20,14 @@ class SpecificationRepository implements ISpecificationRepository {
     this.specifications.push(specification);
   }
 
-  findByName(name: string): Specification | undefined {
+  async findByName(name: string): Promise<Specification | undefined> {
     const sepecification = this.specifications.find((specification) => specification.name === name);
 
     return sepecification;
+  }
+
+  findByIds(ids: string[]): Promise<Specification[]> {
+    throw new Error('Method not implemented.');
   }
 }
 

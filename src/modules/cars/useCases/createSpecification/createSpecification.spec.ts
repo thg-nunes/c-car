@@ -1,5 +1,4 @@
 import { AppError } from '../../../../shared/errors/AppError';
-import { SpecificationRepository } from '../../infra/typeorm/repositories/category/specificationRepository';
 import { CarRepositoryInMemory } from '../createCar/carRepositoryInMemory';
 import { CreateSpecificationUseCase } from './createSpecificationUseCase';
 import { SpecificationRepositoryInMemory } from './specificationRepositoryInMemory';
@@ -42,8 +41,6 @@ describe('CreateSpecification clas', () => {
     });
 
     const specification_id = ['1234'];
-
-    await createSpecificationUseCase.execute({ car_id: car.id, specification_id });
 
     await createSpecificationUseCase.execute({ car_id: car.id, specification_id });
   });
