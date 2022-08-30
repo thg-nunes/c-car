@@ -13,6 +13,7 @@ createConnection();
 import { authenticateRoutes } from './routes/athenticate.routes';
 import { AppError } from '../../errors/AppError';
 import { cars } from './routes/cars.routes';
+import { specifications } from './routes/specification.routes';
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use('/categories', categoriesRoutes);
 app.use('/users', usersRoutes);
 app.use('/cars', cars);
+app.use('/specification', specifications);
 app.use(authenticateRoutes);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction): Response => {

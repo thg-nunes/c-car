@@ -1,3 +1,4 @@
+import { verify } from 'crypto';
 import { NextFunction, Request, Response } from 'express';
 import { User } from '../../modules/accounts/infra/typeorm/entities/user';
 import { UserRepositorie } from '../../modules/accounts/infra/typeorm/repositorie/userRepositorie';
