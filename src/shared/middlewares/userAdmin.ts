@@ -1,20 +1,30 @@
-import { verify } from 'crypto';
+import { verify } from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
-import { User } from '../../modules/accounts/infra/typeorm/entities/user';
 import { UserRepositorie } from '../../modules/accounts/infra/typeorm/repositorie/userRepositorie';
 import { AppError } from '../errors/AppError';
 
 async function userIsAdmin(req: Request, res: Response, next: NextFunction) {
-  const { id }: User = req.body;
+  const token = req.headers.authorization;
 
-  const userRepository = new UserRepositorie();
-  const user = await userRepository.findById(id);
+  if (token) {
+    const [, _token] = token.split(' ');
 
-  if (!user) {
-    throw new AppError('User is not admin!');
+    try {
+      const tokenIsValid = verify(_token, process.env.KEY_TOKEN_GENERATE as string);
+      const { sub: user_id } = tokenIsValid;
+
+      const userRepositorie = new UserRepositorie();
+      const userIsAdmin = await userRepositorie.findById(user_id as string);
+
+      if (!userIsAdmin) {
+        throw new AppError('User is not admin!');
+      }
+
+      next();
+    } catch (err) {
+      throw new AppError(err.message);
+    }
   }
-
-  next();
 }
 
 export { userIsAdmin };
