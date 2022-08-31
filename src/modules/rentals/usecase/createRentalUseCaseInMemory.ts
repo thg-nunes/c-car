@@ -17,11 +17,11 @@ class CreateRentalUseCaseInMemory implements IRentalProtocol {
   }
 
   async findOpenRentalByCarId(car_id: string): Promise<Rental> {
-    return this.rentals.find((rental) => rental.car_id === car_id && rental.expected_return_date === null);
+    return this.rentals.find((rental) => rental.car_id === car_id && !rental.end_date);
   }
 
   async findOpenRentalByUserId(user_id: string): Promise<Rental> {
-    return this.rentals.find((rental) => rental.user_id === user_id);
+    return this.rentals.find((rental) => rental.user_id === user_id && !rental.end_date);
   }
 }
 
