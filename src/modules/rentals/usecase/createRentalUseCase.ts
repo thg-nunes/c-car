@@ -1,3 +1,4 @@
+import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../shared/errors/AppError';
 import { IDateProvider } from '../../../shared/providers/dayjs/protocol';
 import { IRentalProtocol } from '../infra/protocols/iRentalProtocol';
@@ -9,8 +10,14 @@ type IRentalDTO = {
   expected_return_date: Date;
 };
 
+@injectable()
 class CreateRentalUseCase {
-  constructor(private dateProvider: IDateProvider, private createRentalUseCase: IRentalProtocol) {}
+  constructor(
+    @inject('DayjsProvider')
+    private dateProvider: IDateProvider,
+    @inject('RentalRepository')
+    private createRentalUseCase: IRentalProtocol,
+  ) {}
 
   async execute({ car_id, user_id, expected_return_date }: IRentalDTO): Promise<Rental> {
     const minimumHoursToReturnTheCar = 24;
