@@ -1,4 +1,5 @@
 import { container } from 'tsyringe';
+import '../providers';
 import { ICreateUser } from '../../modules/accounts/protocols/iCreateUserProtocol';
 import { UserRepositorie } from '../../modules/accounts/infra/typeorm/repositorie/userRepositorie';
 import { CategoryRepositorie } from '../../modules/cars/infra/typeorm/repositories/categoriesRepositorie';
@@ -9,9 +10,12 @@ import { SpecificationRepository } from '../../modules/cars/infra/typeorm/reposi
 import { ISpecificationRepository } from '../../modules/cars/infra/protocols/iSpecificationRepository';
 import { ICarImageRepository } from '../../modules/cars/infra/protocols/iCarImageRepository';
 import { CarImageRepository } from '../../modules/cars/infra/typeorm/repositories/carImageRepository';
+import { IRentalProtocol } from '../../modules/rentals/infra/protocols/iRentalProtocol';
+import { RentalRepository } from '../../modules/rentals/infra/typeorm/repositories/rental';
 
 container.registerSingleton<ICreateUser>('UserRepositorie', UserRepositorie);
 container.registerSingleton<IRepositorie>('CategoryRepositorie', CategoryRepositorie);
 container.registerSingleton<ICarRepositorie>('CarRepository', CarRepository);
 container.registerSingleton<ISpecificationRepository>('SpecificationRepository', SpecificationRepository);
 container.registerSingleton<ICarImageRepository>('CarImageRepository', CarImageRepository);
+container.registerSingleton<IRentalProtocol>('RentalRepository', RentalRepository);
