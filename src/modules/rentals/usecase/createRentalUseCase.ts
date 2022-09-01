@@ -1,6 +1,5 @@
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
 import { AppError } from '../../../shared/errors/AppError';
+import { IDateProvider } from '../../../shared/providers/dayjs/protocol';
 import { IRentalProtocol } from '../infra/protocols/iRentalProtocol';
 import { Rental } from '../infra/typeorm/entities/rental';
 
@@ -11,10 +10,9 @@ type IRentalDTO = {
 };
 
 class CreateRentalUseCase {
-  constructor(private createRentalUseCase: IRentalProtocol) {}
+  constructor(private dateProvider: IDateProvider, private createRentalUseCase: IRentalProtocol) {}
 
   async execute({ car_id, user_id, expected_return_date }: IRentalDTO): Promise<Rental> {
-    dayjs.extend(utc);
     const minimumHoursToReturnTheCar = 24;
 
     const carUnavailable = await this.createRentalUseCase.findOpenRentalByCarId(car_id);
@@ -31,15 +29,9 @@ class CreateRentalUseCase {
 
     const rental = new Rental();
 
-    /* a linha seguinte pega a data esperada para devolução do carro e converte para o formato de data local */
-    const expectedReturnDate = dayjs(expected_return_date).utc().local().format();
+    const rentalHoursOfTheCar = this.dateProvider.diffDateInHours(expected_return_date);
 
-    /* a linha seguinte pega a data atual */
-    const dateNow = dayjs().utc().local().format();
-
-    const compareDate = dayjs(expectedReturnDate).diff(dateNow, 'hours');
-
-    if (compareDate < minimumHoursToReturnTheCar) {
+    if (rentalHoursOfTheCar < minimumHoursToReturnTheCar) {
       throw new AppError('Invalide date to return the car.');
     }
 

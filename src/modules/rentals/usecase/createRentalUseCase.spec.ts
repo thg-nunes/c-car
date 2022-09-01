@@ -2,18 +2,21 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 
 import { AppError } from '../../../shared/errors/AppError';
+import { DayjsProvider } from '../../../shared/providers/dayjs/Dayjs';
 import { CreateRentalUseCase } from './createRentalUseCase';
 import { CreateRentalUseCaseInMemory } from './createRentalUseCaseInMemory';
 
 let createRentalUseCase: CreateRentalUseCase;
 let createRentalUseCaseInMemory: CreateRentalUseCaseInMemory;
+let dayjsProvider: DayjsProvider;
 
 describe('CreateRentalUseCase', () => {
   dayjs.extend(utc);
   const dateToReturnTheCar = dayjs().add(1, 'day').toDate();
   beforeEach(() => {
+    dayjsProvider = new DayjsProvider();
     createRentalUseCaseInMemory = new CreateRentalUseCaseInMemory();
-    createRentalUseCase = new CreateRentalUseCase(createRentalUseCaseInMemory);
+    createRentalUseCase = new CreateRentalUseCase(dayjsProvider, createRentalUseCaseInMemory);
   });
 
   it('shold create an new rental', async () => {
