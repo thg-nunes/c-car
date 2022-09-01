@@ -14,12 +14,10 @@ export class RentalsCars1661883054821 implements MigrationInterface {
           {
             name: 'car_id',
             type: 'uuid',
-            isNullable: true,
           },
           {
             name: 'user_id',
             type: 'uuid',
-            isNullable: true,
           },
           {
             name: 'start_date',
@@ -34,7 +32,6 @@ export class RentalsCars1661883054821 implements MigrationInterface {
           {
             name: 'expected_return_date',
             type: 'timestamp',
-            isNullable: true,
           },
           {
             name: 'created_at',
