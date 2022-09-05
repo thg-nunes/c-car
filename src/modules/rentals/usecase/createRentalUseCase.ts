@@ -42,6 +42,12 @@ class CreateRentalUseCase {
       throw new AppError('Invalide date to return the car.');
     }
 
+    Object.assign(rental, {
+      car_id,
+      user_id,
+      expected_return_date,
+    });
+
     const rental_created = await this.createRentalUseCase.createRental(rental);
 
     return rental_created;
