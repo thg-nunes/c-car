@@ -1,9 +1,9 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 
-import { AppError } from '../../../shared/errors/AppError';
-import { DayjsProvider } from '../../../shared/providers/dayjs/Dayjs';
-import { CarRepositoryInMemory } from '../../cars/useCases/createCar/carRepositoryInMemory';
+import { AppError } from '../../../../shared/errors/AppError';
+import { DayjsProvider } from '../../../../shared/providers/dayjs/Dayjs';
+import { CarRepositoryInMemory } from '../../../cars/useCases/createCar/carRepositoryInMemory';
 import { CreateRentalUseCase } from './createRentalUseCase';
 import { CreateRentalUseCaseInMemory } from './createRentalUseCaseInMemory';
 

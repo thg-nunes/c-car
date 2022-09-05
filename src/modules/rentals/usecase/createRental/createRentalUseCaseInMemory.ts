@@ -1,5 +1,5 @@
-import { IRentalProtocol } from '../infra/protocols/iRentalProtocol';
-import { Rental } from '../infra/typeorm/entities/rental';
+import { IRentalProtocol } from '../../infra/protocols/iRentalProtocol';
+import { Rental } from '../../infra/typeorm/entities/rental';
 
 class CreateRentalUseCaseInMemory implements IRentalProtocol {
   rentals: Rental[] = [];
