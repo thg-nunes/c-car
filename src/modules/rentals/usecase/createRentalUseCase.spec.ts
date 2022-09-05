@@ -3,11 +3,13 @@ import utc from 'dayjs/plugin/utc';
 
 import { AppError } from '../../../shared/errors/AppError';
 import { DayjsProvider } from '../../../shared/providers/dayjs/Dayjs';
+import { CarRepositoryInMemory } from '../../cars/useCases/createCar/carRepositoryInMemory';
 import { CreateRentalUseCase } from './createRentalUseCase';
 import { CreateRentalUseCaseInMemory } from './createRentalUseCaseInMemory';
 
 let createRentalUseCase: CreateRentalUseCase;
 let createRentalUseCaseInMemory: CreateRentalUseCaseInMemory;
+let carRepositoryInMemory: CarRepositoryInMemory;
 let dayjsProvider: DayjsProvider;
 
 describe('CreateRentalUseCase', () => {
@@ -16,7 +18,9 @@ describe('CreateRentalUseCase', () => {
   beforeEach(() => {
     dayjsProvider = new DayjsProvider();
     createRentalUseCaseInMemory = new CreateRentalUseCaseInMemory();
-    createRentalUseCase = new CreateRentalUseCase(dayjsProvider, createRentalUseCaseInMemory);
+    carRepositoryInMemory = new CarRepositoryInMemory();
+
+    createRentalUseCase = new CreateRentalUseCase(dayjsProvider, createRentalUseCaseInMemory, carRepositoryInMemory);
   });
 
   it('shold create an new rental', async () => {
