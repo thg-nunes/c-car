@@ -14,5 +14,16 @@ class DayjsProvider implements IDateProvider {
 
     return dayjs(expectedReturnDate).diff(dateNow, 'hours');
   }
+
+  diffDateInDays(end_date: Date): number {
+    dayjs.extend(utc);
+    /* a linha seguinte pega a data esperada para devolução do carro e converte para o formato de data local */
+    const expectedReturnDate = dayjs(end_date).local().format();
+
+    /* a linha seguinte pega a data atual */
+    const dateNow = dayjs().local().format();
+
+    return dayjs(expectedReturnDate).diff(dateNow, 'days');
+  }
 }
 export { DayjsProvider };
