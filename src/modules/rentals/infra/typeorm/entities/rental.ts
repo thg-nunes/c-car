@@ -19,6 +19,9 @@ class Rental {
   end_date: Date;
 
   @Column()
+  total: number;
+
+  @Column()
   expected_return_date: Date;
 
   @CreateDateColumn()
