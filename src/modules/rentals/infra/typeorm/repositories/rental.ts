@@ -23,19 +23,32 @@ class RentalRepository implements IRentalProtocol {
     const rentalByCar = this.repository.findOne({
       where: {
         car_id,
+        end_date: null,
       },
     });
 
     return rentalByCar;
   }
+
   async findOpenRentalByUserId(user_id: string): Promise<Rental> {
     const rentalByUser = this.repository.findOne({
       where: {
         user_id,
+        end_date: null,
       },
     });
 
     return rentalByUser;
+  }
+
+  async findById(id: string): Promise<Rental> {
+    const rental = await this.repository.findOne({
+      where: {
+        id,
+      },
+    });
+
+    return rental;
   }
 }
 
