@@ -50,6 +50,17 @@ class RentalRepository implements IRentalProtocol {
 
     return rental;
   }
+
+  async findRentalsByUser(id: string): Promise<Rental[]> {
+    const rentals = await this.repository.find({
+      where: {
+        user_id: id,
+      },
+      relations: ['car'],
+    });
+
+    return rentals;
+  }
 }
 
 export { RentalRepository };
