@@ -25,5 +25,9 @@ class DayjsProvider implements IDateProvider {
 
     return dayjs(expectedReturnDate).diff(dateNow, 'days');
   }
+
+  addDays(days: number): Date {
+    return dayjs().add(days, 'days').toDate();
+  }
 }
 export { DayjsProvider };
