@@ -15,7 +15,7 @@ class UsersTokens {
   user: User;
 
   @Column()
-  refash_token: string;
+  refrash_token: string;
 
   @Column()
   expires_date: Date;

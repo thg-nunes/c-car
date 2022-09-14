@@ -9,11 +9,11 @@ class UserTokensRepositorie implements IUserTokens {
     this.repository = getRepository(UsersTokens);
   }
 
-  async create({ user_id, expires_date, refash_token }): Promise<UsersTokens> {
+  async create({ user_id, expires_date, refrash_token }): Promise<UsersTokens> {
     const userToken = this.repository.create({
       user_id,
       expires_date,
-      refash_token,
+      refrash_token,
     });
 
     await this.repository.save(userToken);
