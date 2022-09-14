@@ -12,6 +12,8 @@ import { ICarImageRepository } from '../../modules/cars/infra/protocols/iCarImag
 import { CarImageRepository } from '../../modules/cars/infra/typeorm/repositories/carImageRepository';
 import { IRentalProtocol } from '../../modules/rentals/infra/protocols/iRentalProtocol';
 import { RentalRepository } from '../../modules/rentals/infra/typeorm/repositories/rental';
+import { IUserTokens } from '../../modules/accounts/protocols/iUserTokens';
+import { UserTokensRepositorie } from '../../modules/accounts/infra/typeorm/repositorie/userTokensRepositorie';
 
 container.registerSingleton<ICreateUser>('UserRepositorie', UserRepositorie);
 container.registerSingleton<IRepositorie>('CategoryRepositorie', CategoryRepositorie);
@@ -19,3 +21,4 @@ container.registerSingleton<ICarRepositorie>('CarRepository', CarRepository);
 container.registerSingleton<ISpecificationRepository>('SpecificationRepository', SpecificationRepository);
 container.registerSingleton<ICarImageRepository>('CarImageRepository', CarImageRepository);
 container.registerSingleton<IRentalProtocol>('RentalRepository', RentalRepository);
+container.registerSingleton<IUserTokens>('UserTokensRepositorie', UserTokensRepositorie);

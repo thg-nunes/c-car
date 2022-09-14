@@ -1,9 +1,12 @@
 import { compare } from 'bcrypt';
 import { inject, injectable } from 'tsyringe';
 import { sign } from 'jsonwebtoken';
+import ms from 'ms';
 
 import { UserRepositorie } from '../../modules/accounts/infra/typeorm/repositorie/userRepositorie';
 import { AppError } from '../errors/AppError';
+import { IUserTokens } from '../../modules/accounts/protocols/iUserTokens';
+import { DayjsProvider } from '../providers/dayjs/Dayjs';
 
 type UserData = {
   email: string;
@@ -15,6 +18,10 @@ class AuthenticateUseCase {
   constructor(
     @inject('UserRepositorie')
     private userRepository: UserRepositorie,
+    @inject('UserTokensRepositorie')
+    private createUserTokens: IUserTokens,
+    @inject('DayjsProvider')
+    private dayJsProvider: DayjsProvider,
   ) {}
 
   async execute({ email, password }: UserData) {
@@ -38,14 +45,36 @@ class AuthenticateUseCase {
       process.env.KEY_TOKEN_GENERATE as string,
       {
         subject: userExists.id,
-        expiresIn: '1d',
+        expiresIn: ms('15m'),
       },
     );
 
+    const refresh_token = sign(
+      {
+        data: userExists.email,
+      },
+      process.env.KEY_REFRESH_TOKEN,
+      {
+        subject: userExists.id,
+        expiresIn: ms('10d'),
+      },
+    );
+
+    const expires_date_refresh_token = this.dayJsProvider.addDays(10);
+
+    await this.createUserTokens.create({
+      user_id: userExists.id,
+      refrash_token: process.env.KEY_REFRESH_TOKEN,
+      expires_date: expires_date_refresh_token,
+    });
+
     return {
-      id: userExists.id,
-      email: userExists.email,
+      user: {
+        id: userExists.id,
+        email: userExists.email,
+      },
       token,
+      refresh_token,
     };
   }
 }
