@@ -62,9 +62,11 @@ class AuthenticateUseCase {
 
     const expires_date_refresh_token = this.dayJsProvider.addDays(10);
 
+    await this.createUserTokens.deleteById(userExists.id);
+
     await this.createUserTokens.create({
       user_id: userExists.id,
-      refrash_token: process.env.KEY_REFRESH_TOKEN,
+      refrash_token: refresh_token,
       expires_date: expires_date_refresh_token,
     });
 
