@@ -10,7 +10,8 @@ async function userIsAdmin(req: Request, res: Response, next: NextFunction) {
     const [, _token] = token.split(' ');
 
     try {
-      const tokenIsValid = verify(_token, process.env.KEY_TOKEN_GENERATE as string);
+      /* Para gerar o token, é usada a mesma chave para criar o refresh token, pois na verificação de token essa é usada para validar o token*/
+      const tokenIsValid = verify(_token, process.env.KEY_REFRESH_TOKEN as string);
       const { sub: user_id } = tokenIsValid;
 
       const userRepositorie = new UserRepositorie();
