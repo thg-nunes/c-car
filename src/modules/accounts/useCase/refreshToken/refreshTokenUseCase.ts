@@ -28,6 +28,8 @@ class RefreshTokenUseCase {
       throw new AppError('Token does not exists.');
     }
 
+    await this.userTokensRepositorie.deleteById(user_id);
+
     await this.userTokensRepositorie.deleteById(userToken.id);
 
     const refresh_token = sign(
