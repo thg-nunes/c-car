@@ -15,6 +15,7 @@ import { AppError } from '../../errors/AppError';
 import { cars } from './routes/cars.routes';
 import { specifications } from './routes/specification.routes';
 import { rentalRoutes } from './routes/rental.routes';
+import { passwordRoutes } from './routes/sendEmailToGetResetPassword.routes';
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use('/users', usersRoutes);
 app.use('/cars', cars);
 app.use('/specification', specifications);
 app.use('/rental', rentalRoutes);
+app.use('/password', passwordRoutes);
 app.use(authenticateRoutes);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction): Response => {
