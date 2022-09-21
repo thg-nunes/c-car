@@ -14,9 +14,9 @@ class UserRepositorie implements ICreateUser {
   async create({ ...data }: ICreateUserDTO): Promise<void> {
     const passwordHash = await hash(data.password, 8);
 
-    const user = await this.repositorie.create({ ...data, password: passwordHash });
+    const user = this.repositorie.create({ ...data, password: passwordHash });
 
-    this.repositorie.save(user);
+    await this.repositorie.save(user);
   }
 
   async findByEmail(email: string): Promise<User | undefined> {
@@ -30,13 +30,23 @@ class UserRepositorie implements ICreateUser {
   }
 
   async findById(id: string): Promise<User | undefined> {
-    const user = this.repositorie.findOne({
+    const user = await this.repositorie.findOne({
       where: {
         id,
       },
     });
 
     return user;
+  }
+
+  async deleteById(id: string): Promise<void> {
+    await this.repositorie
+      .createQueryBuilder()
+      .delete()
+      .where('id= :id', {
+        id,
+      })
+      .execute();
   }
 }
 

@@ -38,5 +38,9 @@ class UserTokensRepositorie implements IUserTokens {
       .where('user_id= :user_id', { user_id })
       .execute();
   }
+
+  async findByToken(refresh_token: string): Promise<UsersTokens> {
+    return await this.repository.findOne({ refrash_token: refresh_token });
+  }
 }
 export { UserTokensRepositorie };
