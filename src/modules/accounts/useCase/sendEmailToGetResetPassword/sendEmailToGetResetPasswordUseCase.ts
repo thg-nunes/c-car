@@ -44,7 +44,7 @@ class SendEmailToGetResetPasswordUseCase {
 
     const variables = {
       name: user.name,
-      url: `${process.env.URL_RESET_PASSWORD}${token}`,
+      link: `${process.env.URL_RESET_PASSWORD}${token}`,
     };
 
     await this.etherialMailProvider.sendMail(email, 'Recuperação de senha', path, variables);
