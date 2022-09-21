@@ -15,6 +15,7 @@ type IUserTokens = {
   create({ user_id, expires_date, refrash_token }: IRequest): Promise<UsersTokens>;
   findByUserIdAndTolken({ refresh_token, user_id }: FindRefreshToken): Promise<UsersTokens>;
   deleteById(user_id: string): Promise<void>;
+  findByToken(refresh_token: string): Promise<UsersTokens>;
 };
 
 export { IUserTokens };

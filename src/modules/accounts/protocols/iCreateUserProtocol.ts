@@ -11,6 +11,7 @@ interface ICreateUser {
   create(data: ICreateUserDTO): Promise<void>;
   findByEmail(email: string): Promise<User | undefined>;
   findById(id: string): Promise<User | undefined>;
+  deleteById(id: string): Promise<void>;
 }
 
 export { ICreateUser };
