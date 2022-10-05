@@ -1,7 +1,7 @@
 import fs from 'fs';
 import csvParser from 'csv-parser';
 
-import { IRepositorie } from '../../infra/typeorm/repositories/ICategoriesRepository';
+import { IRepositorie } from '../../infra/protocols/ICategoriesRepository';
 
 type ImportCategory = {
   name: string;
